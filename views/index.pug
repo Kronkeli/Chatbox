@@ -5,6 +5,7 @@ block content
   p Welcome to #{title}. The unfamous blogging site!
 
   h3 Proceed by logging in:
+  
   form(method='POST' action='/login')
     div.form-group
       label(for='name') Name:
@@ -12,4 +13,6 @@ block content
     div.form-group
       label(for='content') Password:
       input#content.form-control(type='text' name='content')
-    button.btn.btn-primary(type='submit') Ok
+    button.btn.btn-primary(type='submit') Login
+  
+  button.signup-btn(onClick="location.href = '/signup'") Sign up?

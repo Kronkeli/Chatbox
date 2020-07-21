@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    h1= title
+
+    p Fill in your credentials:
+    form(method='POST' action='/signup/createAccount')
+        div.form-group
+            label(for='name') Name:
+            input#name.form-control(type='text' name='username')
+        div.form-group
+            label(for='content') Password:
+            input#content.form-control(type='text' name='password')
+        button.btn.btn-primary(type='submit') Sign up
