@@ -1,14 +1,11 @@
 extends layout
 
 block content
-  h1= title
-  p Here is some main page content to enjoy!
-
-  header
-    div.menu-btn
-        div.btn-line
-        div.btn-line
-        div.btn-line
+    header
+        div.menu-btn
+            div.btn-line
+            div.btn-line
+            div.btn-line
     .menu
         .menu-nav
             li.nav-item
@@ -17,4 +14,13 @@ block content
                 a.nav-link Oma sivu
             li.nav-item
                 a.nav-link Kaverit
-            
+    script(src="javascripts/main.js")
+
+    main
+
+        h3.lg-heading Some epic content
+        div.post-box #[strong Jaska]
+            p Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe a modi aliquam dolores fugit numquam, tempora commodi aut ratione quasi!
+
+        div.post-box #[strong Jokunen]
+            p Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam accusamus deserunt asperiores velit voluptatum placeat obcaecati consequuntur non laborum earum.
