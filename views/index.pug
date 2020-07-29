@@ -6,7 +6,7 @@ block content
   h3.sm-heading Proceed by logging in:
   
   div Proceed by logging in:
-  form#myForm(method='POST' action='/login' onsubmit="return validateForm()" required)
+  form#myForm(method='POST' action='/login')
     label(for='name') Username:
     br
     input#name.form-control(type='text' name='username')
@@ -18,4 +18,3 @@ block content
     button.btn.btn-primary(type='submit') Login
   button.signup-btn(onClick="location.href = '/signup'") Sign up?
   
-  script(src='javascripts/formValidator.js')

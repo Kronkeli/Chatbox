@@ -4,13 +4,15 @@ block content
     h1= title
 
     p Fill in your credentials:
-    form(method='POST' action='/login')
-    label(for='name') Username:
-    br
-    input#name.form-control(type='text' name='username')
-    br
-    label(for='content') Password:
-    br
-    input#content.form-control(type='password' name='password')
-    br
-    button.btn.btn-primary(type='submit') Create account
+    form#myForm(method='POST' action='signup')
+        label(for='name') Username:
+        br
+        input#name.form-control(type='text' name='username')
+        br
+        label(for='content') Password:
+        br
+        input#content.form-control(type='password' name='password1')
+        br
+        input#content.form-control(type='password' name='password2')
+        br
+        button.btn.btn-primary(type='submit') Create account
