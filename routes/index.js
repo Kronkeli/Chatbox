@@ -42,7 +42,7 @@ router.post('/login', auth.optional, (req, res, next) => {
   console.log("loginissa ollaan");
   // const { body: { user } } = req;
   const user = req.body;
-  console.log(JSON.stringify(user));
+  console.log("tässä loginin request contentti: " + JSON.stringify(user));
   // let errors = [];
 
   // if (!user.username) {
@@ -73,12 +73,12 @@ router.post('/login', auth.optional, (req, res, next) => {
       const user = passportUser;
       user.token = passportUser.generateJWT();
       // Set cookies
-      console.log("userobjekt : " + user);
-      console.log("userJSON : " + JSON.stringify({ "_id": user._id, "username": user.username, "token": user.token }));
+      // console.log("userobjekt : " + user);
+      // console.log("userJSON : " + JSON.stringify({ "_id": user._id, "username": user.username, "token": user.token }));
       var userString = JSON.stringify({ "_id": user._id, "username": user.username, "token": user.token });
       res.cookie('payload', userString);
       // console.log("coocies laitettu: " + req.cookies);
-      console.log("token on: " + userString);
+      // console.log("token on: " + userString);
       return res.render('main', { "title": "main", "user": user.username });
       // return res.json({ user: user.toAuthJSON() });
     }

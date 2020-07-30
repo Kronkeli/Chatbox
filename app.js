@@ -52,21 +52,21 @@ app.use(session({ secret: 'chatbox', cookie: { maxAge: 5 }, resave: false, saveU
 
 // JOS KEKSEILLÄ NIIN TÄSSÄ COOKIEHOMMIA
 // set a cookie
-app.use(function (req, res, next) {
-  // check if client sent cookie
-  var cookie = req.cookies.cookieName;
-  if (cookie === undefined) {
-    // no: set a new cookie
-    var randomNumber = Math.random().toString();
-    randomNumber = randomNumber.substring(2, randomNumber.length);
-    res.cookie('cookieName', randomNumber, { maxAge: 3, httpOnly: true }); // Vanha maxAge: 900000
-    console.log('cookie created successfully');
-  } else {
-    // yes, cookie was already present 
-    console.log('cookie exists', cookie);
-  }
-  next(); // <-- important!
-});
+// app.use(function (req, res, next) {
+//   // check if client sent cookie
+//   var cookie = req.cookies.cookieName;
+//   if (cookie === undefined) {
+//     // no: set a new cookie
+//     var randomNumber = Math.random().toString();
+//     randomNumber = randomNumber.substring(2, randomNumber.length);
+//     res.cookie('cookieName', randomNumber, { maxAge: 3, httpOnly: true }); // Vanha maxAge: 900000
+//     // console.log('cookie created successfully');
+//   } else {
+//     // yes, cookie was already present 
+//     console.log('cookie exists', cookie);
+//   }
+//   next(); // <-- important!
+// });
 
 app.use(express.static(path.join(__dirname, 'public')));
 // // let static middleware do its job

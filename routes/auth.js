@@ -3,14 +3,13 @@ const jwt = require('express-jwt');
 const getTokenFromHeaders = (req) => {
     const { headers: { authorization } } = req;
     console.log("onko authorization:  " + authorization);
-    // console.log("getTokenFromHeaders palauttaa :" + authorization.split(' ')[1]);
-    // getTokenFromCookies();
     if (authorization && authorization.split(' ')[0] === 'Token') {
         return authorization.split(' ')[1];
     }
     return null;
 };
 
+// Guess NOT TO DO
 function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
@@ -26,7 +25,6 @@ function getCookie(cname) {
     }
     return "";
 }
-
 const getTokenFromCookies = (req) => {
     const payload = req.cookies;
     var authorization = getCookie('payload');
@@ -44,7 +42,6 @@ const auth = {
         secret: 'chatbox',
         userProperty: 'payload',
         getToken: getTokenFromHeaders,
-        // getToken: getTokenFromCookies,
         credentialsRequired: false,
         algorithms: ['HS256']
     }),

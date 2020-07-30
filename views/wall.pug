@@ -4,14 +4,21 @@ block content
   h1.lg-heading= title
   
   h2 Submit New Post
-  form(method='POST' action='/wall/createPost')
-    div.form-group
-      label(for='content') Write your post!
-      input#content.form-control(type='text' maxlength= "140" name='content')
-    button.btn.btn-primary(type='submit') Submit post!
+  //- form#postForm(onsubmit='createPost()')
+  //- <div class="tweet-box">
+  //- <textarea class="tweet-input"></textarea>
+  //- <button class="active">Tweet</button>
+  //- <span class="danger">140</span>
+  //- </div>
+  div.form-group
+    label(for='content') Write your post!
+    input#textBox(type='text' maxlength= "140" name='content' autocomplete="off" height="120")
+    button.btn.btn-primary(onClick='createPost()') Submit post!
   
-  ul
-  each post in post_list
-    li #{post.author}: #{post.content}
-  else
-      li There are no posts yet.
+  div#posts
+    each post in post_list.reverse()
+      div.postBox <strong> #{post.author} </strong> <br> #{post.content}
+    else
+        li There are no posts yet.
+
+  //- script(src="javascripts/main.js") lataa tiedoston uudestaan..

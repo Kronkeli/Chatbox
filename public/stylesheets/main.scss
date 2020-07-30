@@ -66,6 +66,61 @@ main {
   }
 }
 
+.tweet-box {
+  font-size: 18px;
+  padding: 10px;
+  position: relative;
+}
+.tweet-input {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
+  padding: 15px 12px;
+  outline: none;
+  width: 100%;
+}
+span {
+  float: right;
+  padding: 18px 14px;
+}
+.warning {
+  color: #a76c00;
+}
+.danger {
+  color: #800000;
+}
+button {
+  background-color: #ccc;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  color: #fefefe;
+  font-size: 18px;
+  float: right;
+  margin-top: 10px;
+  padding: 10px 25px;
+}
+button:hover {
+  background-color: #333;
+}
+button.active {
+  background-color: #008cff;
+  cursor: pointer;
+}
+
+// #textBox {
+//   width: 150px;
+//   height: 120px;
+// }
+
+.postBox {
+  background: lighten($primary-color, 6);
+  padding: 0.5rem;
+  border: lighten($secondary-color, 0.5) 2px solid;
+  margin-bottom: 10px;
+}
+
 // Menu button
 .menu-btn {
   position: absolute;
