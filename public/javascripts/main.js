@@ -1,5 +1,7 @@
 // Select DOM Items
 
+// const { render } = require("../../app");
+
 const menuBtn = document.querySelector('.menu-btn');
 const menu = document.querySelector('.menu');
 const menuNav = document.querySelector('.menu-nav');
@@ -8,7 +10,7 @@ const navItems = document.querySelectorAll('.nav-item');
 const etusivunappi = document.getElementById('etusivu');
 
 let xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://localhost:3000/current');
+xhr.open('GET', 'http://localhost:3000/wall');
 
 // Set Initial State of Menu
 let showMenu = false;
@@ -37,7 +39,7 @@ function toggleMenu() {
     }
 }
 
-etusivunappi.addEventListener('click', toCurrent);
+etusivunappi.addEventListener('click', toWall);
 
 function getCookie(cname) {
     var name = cname + "=";
@@ -55,17 +57,40 @@ function getCookie(cname) {
     return "";
 }
 
-function toCurrent() {
+function toWall() {
     console.log("kaikki keksit: " + document.cookie);
     console.log("pelkkä keksi: " + getCookie('payload'));
     var payload = JSON.parse(getCookie('payload'));
-
+    console.log("payload.token: " + payload.token);
     xhr.setRequestHeader('Authorization', "Token " + payload.token);
+
     xhr.withCredentials = true;
     xhr.send();
+    // let url = 'wall';
+
+    // let headers = new Headers();
+
+    // //headers.append('Content-Type', 'text/json');
+    // headers.append('Authorization', 'Token ' + payload.token);
+
+    // fetch(url, {
+    //     method: 'GET',
+    //     headers: headers,
+    //     credentials: 'include',
+    //     redirect: 'follow'
+    // })
+    // .then(response => response.json());
+    // .then(json => console.log(json));
+    // .done();
+
+    // function parseJSON(response) {
+    //     return response.json()
+    // }
 }
 
 xhr.onload = function () {
     console.log("response saatu");
-    window.location.assign('/');
+    console.log(JSON.stringify(xhr.response));
+    document.write(xhr.response);
+    // window.location.assign('wall'); ei toimi koska authorization..
 }

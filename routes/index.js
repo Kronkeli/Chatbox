@@ -1,4 +1,3 @@
-// Setting up a XMLHttpRequest
 const mongoose = require('mongoose');
 const passport = require('passport');
 const express = require('express');
@@ -62,7 +61,8 @@ router.post('/login', auth.optional, (req, res, next) => {
   //   });
   // }
 
-  return passport.authenticate('local', { session: false }, (err, passportUser, info) => {
+  // return passport.authenticate('local', { session: false }, (err, passportUser, info) => {
+  return passport.authenticate('local', (err, passportUser, info) => {
     if (err) {
       console.log("error passport.authenticatessa!");
       return next(err);
@@ -79,7 +79,7 @@ router.post('/login', auth.optional, (req, res, next) => {
       res.cookie('payload', userString);
       // console.log("coocies laitettu: " + req.cookies);
       console.log("token on: " + userString);
-      return res.redirect('main');
+      return res.render('main', { "title": "main", "user": user.username });
       // return res.json({ user: user.toAuthJSON() });
     }
 
@@ -91,20 +91,19 @@ router.post('/login', auth.optional, (req, res, next) => {
   })(req, res, next)
 });
 
-//GET current route (required, only authenticated users have access)
-router.get('/current', auth.required, (req, res, next) => {
-  const { payload: { id } } = req;
+// //GET current route (required, only authenticated users have access)
+// router.get('/wall', auth.required, (req, res, next) => {
+//   const { payload: { id } } = req;
 
-  console.log("idenä toimii: " + id);
-  return Users.findById(id).then((user) => {
-    if (!user) {
-      console.log("/currentissa id:llä ei useria löytynyt");
-      return res.sendStatus(400);
-    }
-    console.log("/currentissa user löytynyt");
-    return res.json({ user: user.toAuthJSON() });
-    // return res.redirect("/");
-  })
-});
+//   console.log("idenä toimii: " + id);
+//   return Users.findById(id).then((user) => {
+//     if (!user) {
+//       console.log("/wallissa id:llä ei useria löytynyt");
+//       return res.sendStatus(400);
+//     }
+//     console.log("/wallissa user löytynyt");
+//     return res.json({ user: user.toAuthJSON() });
+//   })
+// });
 
 module.exports = router;

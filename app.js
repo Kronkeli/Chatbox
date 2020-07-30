@@ -22,6 +22,7 @@ require('./config/passport');
 var indexRouter = require('./routes/index');
 var mainRouter = require('./routes/main');
 var signupRouter = require('./routes/signup');
+var wallRouter = require('./routes/wall');
 
 // Set up database connection
 var mongoURL = "mongodb://localhost:27017/chatbox";
@@ -47,7 +48,7 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 
-app.use(session({ secret: 'chatbox', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
+app.use(session({ secret: 'chatbox', cookie: { maxAge: 5 }, resave: false, saveUninitialized: false })); // vanha maxAge:60000
 
 // JOS KEKSEILLÄ NIIN TÄSSÄ COOKIEHOMMIA
 // set a cookie
@@ -71,13 +72,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // // let static middleware do its job
 // app.use(express.static(__dirname + '/public'));
 
-// // Passport middleware JOS TÄYTYY ITSE KÄYNNISTÄÄ
-// app.use(passport.initialize());
-// app.use(passport.session());
+// Passport middleware JOS TÄYTYY ITSE KÄYNNISTÄÄ
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/main', mainRouter);
 app.use('/signup', signupRouter);
+app.use('/wall', wallRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
