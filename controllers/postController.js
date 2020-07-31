@@ -48,19 +48,35 @@ exports.index = function (req, res, next) {
                         // log the request and respond with 406
                         return res.status(406).send('Not Acceptable');
                     }
-
                 });
             }
         }
     });
 };
 
-exports.createPost = function (req, res, next) {
+exports.ownWall = function (req, res, next) {
     // Username from clients cookies
     decodedCookie = req.headers.cookie;
     // decodedCookie = decodedURLComponent(req.headers.cookie);
     var username = JSON.parse(req.cookies.payload).username;
+    console.log("haetaan käyttäjän " + username + " postit!");
+    return Post.find({ author: username }).then((list_posts) => {
+        if (!list_posts) {
+            console.log("Postilistaa ei löydy");
+            next(err);
+        } else {
+            console.log("postilista löytynyt ja se on: " + list_posts);
+            return res.render('wall', { title: "Own Wall", post_list: list_posts });
+        }
+    });
+};
+
+exports.createPost = function (req, res, next) {
     sanitizeBody('*').trim().escape();
+    // Username from clients cookies
+    decodedCookie = req.headers.cookie;
+    // decodedCookie = decodedURLComponent(req.headers.cookie);
+    var username = JSON.parse(req.cookies.payload).username;
     console.log("uusi post{ author: " + username + " ja content: " + req.headers.content + "}");
 
     // Create a new Post and save it to database

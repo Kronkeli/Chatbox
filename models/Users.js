@@ -27,8 +27,6 @@ UsersSchema.methods.setPassword = function (password) {
 
 UsersSchema.methods.validatePassword = function (password) {
     const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
-    // console.log("Vertailun tulos: " + this.hash);
-    // console.log("ja SEURAAVA: " + hash);
     return this.hash === hash;
 };
 

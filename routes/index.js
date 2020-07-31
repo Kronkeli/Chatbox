@@ -11,11 +11,13 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'ChatBox' });
 });
 
+/* GET create account form. */
+router.get('/signup', function (req, res, next) {
+  res.render('signup', { title: "Create account" });
+});
 
 //POST create new user route (optional, everyone has access)
 router.post('/signup', auth.optional, (req, res, next) => {
-  console.log("usernaame tuli läpi: " + req.body.username);
-  // const { body: { user } } = req;
 
   var name = req.body.username;
   var password1 = req.body.password1;
@@ -25,10 +27,23 @@ router.post('/signup', auth.optional, (req, res, next) => {
 
   const user = { username: req.body.username, password: req.body.password1 };
   console.log(req.body);
+
   if (password1 !== password2) {
-    console.log("salasanat ei täsmää");
-    return res.redirect("/signup");
+    return res.status(422).json({
+      errors: {
+        password: 'Passwords do not match',
+      },
+    });
   }
+
+  else if (password1.length < 8) {
+    return res.status(422).json({
+      errors: {
+        password: 'is too short',
+      },
+    });
+  }
+
   const finalUser = new Users(user);
 
   finalUser.setPassword(user.password);
@@ -39,27 +54,23 @@ router.post('/signup', auth.optional, (req, res, next) => {
 
 //POST login route (optional, everyone has access)
 router.post('/login', auth.optional, (req, res, next) => {
-  console.log("loginissa ollaan");
-  // const { body: { user } } = req;
   const user = req.body;
-  console.log("tässä loginin request contentti: " + JSON.stringify(user));
-  // let errors = [];
 
-  // if (!user.username) {
-  // return res.status(422).json({
-  //   errors: {
-  //     username: 'is required',
-  //   },
-  // });
-  // }
+  if (!user.username) {
+    return res.status(422).json({
+      errors: {
+        username: 'is required',
+      },
+    });
+  }
 
-  // if (!user.password) {
-  //   return res.status(422).json({
-  //     errors: {
-  //       password: 'is required',
-  //     },
-  //   });
-  // }
+  if (!user.password) {
+    return res.status(422).json({
+      errors: {
+        password: 'is required',
+      },
+    });
+  }
 
   // return passport.authenticate('local', { session: false }, (err, passportUser, info) => {
   return passport.authenticate('local', (err, passportUser, info) => {

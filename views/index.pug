@@ -1,20 +1,21 @@
 extends layout
 
 block content
-  h1.lg-heading= title
-  h3.sm-heading Welcome to #{title}. The unfamous blogging site!
-  h3.sm-heading Proceed by logging in:
-  
-  div Proceed by logging in:
-  form#myForm(method='POST' action='/login')
-    label(for='name') Username:
-    br
-    input#name.form-control(type='text' name='username')
-    br
-    label(for='content') Password:
-    br
-    input#content.form-control(type='password' name='password' autocomplete="off")
-    br
-    button.btn.btn-primary(type='submit') Login
-  button.signup-btn(onClick="location.href = '/signup'") Sign up?
-  
+  main#home
+    h1.lg-heading= title
+    h3.sm-heading Welcome to #{title}. The unfamous blogging site!
+    h3.sm-heading Proceed by logging in:
+    
+    div Proceed by logging in:
+    form#myForm(method='POST' action='/login')
+      label(for='name') Username:
+      br
+      input#name.form-control(type='text' name='username')
+      br
+      label(for='content') Password:
+      br
+      input#content.form-control(type='password' name='password' autocomplete="off")
+      br
+      button.btn.btn-primary(type='submit') Login
+    button.signup-btn(onClick="location.href = '/signup'") Sign up?
+    

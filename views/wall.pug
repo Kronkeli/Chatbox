@@ -1,24 +1,18 @@
 extends layout
-    
+
 block content
+
   h1.lg-heading= title
   
-  h2 Submit New Post
-  //- form#postForm(onsubmit='createPost()')
-  //- <div class="tweet-box">
-  //- <textarea class="tweet-input"></textarea>
-  //- <button class="active">Tweet</button>
-  //- <span class="danger">140</span>
-  //- </div>
-  div.form-group
-    label(for='content') Write your post!
-    input#textBox(type='text' maxlength= "140" name='content' autocomplete="off" height="120")
-    button.btn.btn-primary(onClick='createPost()') Submit post!
-  
+  h2 Submit New Post (Refresh page to return to main)
+
+  div.form-group.tweet-box
+    label Write your post!
+    textarea.tweet-input#textBox(maxlength='140' bind:value='message')
+    button.active.submitbtn(onClick='createPost()') Submit!
+    span 140
+
   div#posts
     each post in post_list.reverse()
       div.postBox <strong> #{post.author} </strong> <br> #{post.content}
-    else
-        li There are no posts yet.
 
-  //- script(src="javascripts/main.js") lataa tiedoston uudestaan..
