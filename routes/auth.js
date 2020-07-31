@@ -25,11 +25,6 @@ function getCookie(cname) {
     }
     return "";
 }
-const getTokenFromCookies = (req) => {
-    const payload = req.cookies;
-    var authorization = getCookie('payload');
-    console.log(authorization);
-}
 
 const auth = {
     required: jwt({
