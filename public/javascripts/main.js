@@ -115,7 +115,7 @@ xhr_ownWall.onload = function () {
 function toWall() {
     var payload = JSON.parse(getCookie('payload'));
     // xhr_index.open('GET', 'http://localhost:3000/wall');
-    xhr_loadPosts.open("GET", "https://chatbox-project.herokuapp.com/wall");
+    xhr_index.open("GET", "https://chatbox-project.herokuapp.com/wall");
     xhr_index.setRequestHeader('Authorization', "Token " + payload.token);
     xhr_index.withCredentials = true;
     xhr_index.send();
@@ -124,7 +124,7 @@ function toWall() {
 function toOwnWall() {
     var payload = JSON.parse(getCookie('payload'));
     // xhr_ownWall.open('GET', 'http://localhost:3000/wall/ownWall');
-    xhr_loadPosts.open("GET", "https://chatbox-project.herokuapp.com/ownWall");
+    xhr_ownWall.open("GET", "https://chatbox-project.herokuapp.com/ownWall");
     xhr_ownWall.setRequestHeader('Authorization', "Token " + payload.token);
     xhr_ownWall.withCredentials = true;
     xhr_ownWall.send();
@@ -137,7 +137,7 @@ function createPost() {
     var postString = document.getElementById("textBox").value;
     postString = postString.replace(/(\r\n|\n|\r)/gm, " ");
     // xhr_createpost.open("POST", "http://localhost:3000/wall/createPost");
-    xhr_loadPosts.open("GET", "https://chatbox-project.herokuapp.com/createPost");
+    xhr_createpost.open("POST", "https://chatbox-project.herokuapp.com/createPost");
     var payload = JSON.parse(getCookie('payload'));
     var author = payload.username;
 
